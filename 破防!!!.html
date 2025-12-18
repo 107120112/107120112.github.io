@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>大破防｜完整版地獄特效</title>
+<style>
+body{
+font-family:'Comic Sans MS',cursive;
+background:linear-gradient(45deg,#ff0040,#ffea00,#00ff9c,#00c3ff,#7f00ff,#ff0040);
+background-size:600% 600%;
+animation:bgMove 6s linear infinite, screenShake 0.4s infinite alternate;
+color:white;
+margin:0;padding:20px;
+border:24px solid transparent;
+border-image:url('https://i.imgur.com/1GX9ZyK.png') 30 round;
+text-shadow:3px 3px 6px black,0 0 12px white;
+}
+@keyframes bgMove{0%{background-position:0% 50%}100%{background-position:100% 50%}}
+@keyframes screenShake{0%{transform:translate(0,0)}100%{transform:translate(2px,1px)}}
+.card{
+max-width:900px;margin:40px auto;
+background:rgba(0,0,0,.5);
+padding:30px;border-radius:24px;
+box-shadow:0 0 60px rgba(255,255,255,.8);
+position:relative;overflow:hidden;
+}
+.card::before{
+content:"";position:absolute;inset:-4px;
+background:linear-gradient(120deg,red,yellow,lime,cyan,blue,magenta,red);
+background-size:300% 300%;
+animation:borderFlow 3s linear infinite;
+filter:blur(8px);z-index:-1;
+}
+@keyframes borderFlow{0%{background-position:0% 50%}100%{background-position:100% 50%}}
+h1{text-align:center;font-size:56px;margin:0;animation:rainbow 2.5s linear infinite;}
+@keyframes rainbow{0%{filter:hue-rotate(0)}100%{filter:hue-rotate(360deg)}}
+.explode{display:inline-block;font-weight:900;color:#ff0033;
+text-shadow:0 0 12px #ff0066,0 0 30px #ff0000;
+animation:boom .35s ease-out;}
+@keyframes boom{0%{transform:scale(1)}40%{transform:scale(1.7) rotate(8deg)}70%{transform:scale(1.3) rotate(-6deg)}100%{transform:scale(1.45)}}
+.marquee{margin:20px 0;white-space:nowrap;overflow:hidden;font-size:24px;font-weight:bold;}
+.marquee span{display:inline-block;padding-left:100%;animation:marq 8s linear infinite;}
+@keyframes marq{0%{transform:translateX(0)}100%{transform:translateX(-100%)}}
+button{font-size:22px;padding:16px 30px;border-radius:16px;border:4px solid white;
+background:linear-gradient(90deg,#ff00ff,#00ffff,#ffff00);cursor:pointer;}
+#out{margin-top:30px;font-size:26px;text-align:center;
+box-shadow:0 0 40px rgba(255,255,255,.7);
+padding:20px;border-radius:16px;
+animation:flash 1s infinite alternate;}
+@keyframes flash{from{filter:brightness(1)}to{filter:brightness(1.6)}}
+</style>
+</head>
+<body>
+<div class="card">
+<h1 id="title">大破防</h1>
+<div class="marquee"><span>🙏 做人要知足・心內要快活・看到這頁你已經輸了 🙏</span></div>
+<div style="text-align:center;margin:20px">
+<button id="gen">🔥 破防 🔥</button>
+<button id="exportImg">🖼️ 下載長輩圖 PNG</button>
+</div>
+<div id="out">點下去，直接破防</div>
+</div>
+<script>
+const base = {
+mild:[
+"今天的我，已經努力到只差向披薩下跪了。",
+"別急，明天再來當你的救兵。",
+"人生像泡麵，需要時刻準備好熱水。",
+"笑一笑，煩惱就會假裝不見。",
+"事情沒那麼糟，只是你想很多。",
+"慢慢來，比較快。",
+"今天撐過去，明天再說。",
+"人活著，本來就不容易。",
+"做人要知足，心內要快活。",
+"天無絕人之路，只是你走錯路。"
+],
+spicy:[
+"你的人生像氣球，遲早被針扎爆。",
+"別跟我比穩定，你連心情都三分鐘熱度。",
+"別太相信網路推薦，除了廣告一無是處。",
+"你不是沒努力，是努力方向全錯。",
+"問題不大，只是你剛好不行。",
+"不是世界針對你，是你太顯眼。",
+"做人別太認真，會被現實笑。",
+"你最大的問題，是太相信自己。",
+"人可以笨，但不要笨得很自豪。",
+"你的潛力，主要體現在拖延上。"
+],
+savage:[
+"如果你的腦子是 Wi-Fi，那一定在飛行模式。",
+"笑是假的，牙齒是真的，自我修復不到位。",
+"你的人生像舊電池，只會偶爾撐一下。",
+"你不是沒機會，只是機會看到你就走了。",
+"你這一生最大的成就，是還沒被封鎖。",
+"別擔心未來，你根本沒有未來。",
+"你連翻身都懶，還想翻盤。",
+"人生對你已經很客氣了。",
+"如果努力有用，你早就不在這裡。",
+"你最大的優點，就是還活著。"
+]};
+const title=document.getElementById('title');
+const out=document.getElementById('out');
+document.getElementById('gen').onclick=()=>{
+const all=[...base.mild,...base.spicy,...base.savage];
+out.textContent=all[Math.floor(Math.random()*all.length)];
+title.classList.remove('explode');void title.offsetWidth;title.classList.add('explode');
+};
+</script>
+</body>
+</html>
